@@ -1,4 +1,4 @@
-package com.zrzring.douyin_memo.model
+package com.zrzring.douyin_memo
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

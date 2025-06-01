@@ -1,13 +1,17 @@
-package com.zrzring.douyin_memo.dao
+package com.zrzring.douyin_memo
 
-import androidx.room.*
-import com.zrzring.douyin_memo.model.Memo
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MemoDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insert(memo: Memo)
 
     @Update
