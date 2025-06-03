@@ -1,6 +1,5 @@
 package com.zrzring.douyin_memo
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -11,17 +10,19 @@ import androidx.core.content.edit
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private val prefsName = "LoginPrefs"
-    private val keyRememberMe = "key.rememberme"
+    companion object {
+        const val PREFS_NAME = "LoginPrefs"
+        const val KEY_REMEMBER_ME = "Remember"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sharedPreferences = getSharedPreferences(prefsName, Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
-        if (sharedPreferences.getBoolean(keyRememberMe, true)) {
+        if (sharedPreferences.getBoolean(KEY_REMEMBER_ME, false)) {
             navigateToMemoList()
             return
         }
@@ -33,11 +34,11 @@ class LoginActivity : AppCompatActivity() {
             if (username.isNotEmpty() && password.isNotEmpty()) {
                 if (binding.checkBoxRememberMe.isChecked) {
                     sharedPreferences.edit {
-                        putBoolean(keyRememberMe, true)
+                        putBoolean(KEY_REMEMBER_ME, true)
                     }
                 } else {
                     sharedPreferences.edit {
-                        putBoolean(keyRememberMe, false)
+                        putBoolean(KEY_REMEMBER_ME, false)
                     }
                 }
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show()

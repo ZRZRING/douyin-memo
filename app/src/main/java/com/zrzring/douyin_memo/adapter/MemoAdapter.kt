@@ -1,5 +1,6 @@
 package com.zrzring.douyin_memo.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -27,9 +28,12 @@ class MemoAdapter(
 
     override fun getItemCount(): Int = memos.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newMemos: List<Memo>) {
         memos = newMemos
-        notifyDataSetChanged() // 在实际项目中建议使用 DiffUtil
+
+        // 全量更新
+        notifyDataSetChanged()
     }
 
     class MemoViewHolder(private val binding: ItemMemoBinding) : RecyclerView.ViewHolder(binding.root) {
